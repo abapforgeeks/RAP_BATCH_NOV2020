@@ -1,0 +1,10 @@
+@EndUserText.label: 'Purchase Report'
+define service ZRISHI_SD_PurchaseReportV1 {
+  expose ZI_RISHI_POHeader;
+  expose ZI_RISHI_POItem;
+  expose ZI_RISHI_POToalPrice;
+  expose ZI_RISHI_POStatus;
+  expose ZI_RISHI_POPriority;
+  expose ZC_RISHI_POHEADER;
+  expose ZC_RISHI_POITEMS;
+}

@@ -1,0 +1,131 @@
+@Metadata.layer: #CORE
+@UI:{
+headerInfo:{
+
+typeName: 'Purchase Document',
+typeNamePlural: 'Purchase Documents',
+
+title:{
+value:'PoDocument',
+type: #STANDARD
+},
+
+description:{ value: 'PoDesc' ,type: #STANDARD}
+}
+
+
+}
+@Search.searchable: true
+annotate view ZC_RISHI_POHEADER with
+{
+    
+  @UI.facet: [
+  
+  { 
+  
+  id:'TotalPrice',
+  type:#DATAPOINT_REFERENCE,
+  purpose: #HEADER,
+  targetQualifier: 'POTotalPrice'
+  }  ,
+  
+  { 
+  id:'Status',
+  type: #DATAPOINT_REFERENCE,
+  purpose: #HEADER,
+  targetQualifier: 'PoStatus'
+  
+  },
+  
+ 
+  { 
+  
+  id:'Priority',
+  type:#DATAPOINT_REFERENCE,
+  purpose: #HEADER,
+  targetQualifier: 'PoPriority'
+  },
+  
+  { 
+  
+  id:'PurchaseInfoCollection',
+  type:#COLLECTION,
+  label: 'Purchase Details',
+  purpose: #STANDARD
+  },
+  
+  { 
+  
+  id:'FiledGroupFacet',
+  type:#FIELDGROUP_REFERENCE,
+  parentId: 'PurchaseInfoCollection',
+  targetQualifier: 'PurchaseBasicData',
+  label: 'Purchase Info'
+  },
+  
+  { 
+  
+  id:'AdminSection',
+  type:#FIELDGROUP_REFERENCE,
+  parentId: 'PurchaseInfoCollection',
+  targetQualifier: 'AdminData',
+  label: 'Admin Information'
+  },
+  
+  { 
+  
+  id:'PurchaseItems',
+  type:#LINEITEM_REFERENCE,
+  purpose: #STANDARD,
+  label: 'Purchase Items',
+  targetElement: '_toItem'
+  }
+  
+  
+  ]  
+  @UI.lineItem: [{ position: 10,label: 'Purchase Document' ,importance: #HIGH }]  
+  @UI.selectionField: [{ position: 30 }]
+  @UI.fieldGroup: [{ position: 10,label: 'Purchase Document',qualifier: 'PurchaseBasicData' }]
+  PoDocument;
+  @UI.lineItem: [{ position: 20,label: 'Purchase Description' ,importance: #HIGH }]  
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.7
+  @Search.ranking: #HIGH
+  PoDesc;
+  @UI.lineItem: [{ position: 30,label: 'Purchase Total Price' ,importance: #HIGH }]  
+  @UI.dataPoint:{ title:'Total Price' }
+  @UI.fieldGroup: [{ position: 20,label: 'Total Price',qualifier: 'PurchaseBasicData' }]
+  POTotalPrice;
+  @UI.lineItem: [{ position: 40,label: 'Currency' ,importance: #HIGH }]  
+  Currency;
+  @UI.lineItem: [{ position: 50,label: 'Purchase Status' ,importance: #HIGH }]  
+  @UI.selectionField: [{ position: 10 }]
+  @UI.dataPoint:{ title:'Status' }
+  @UI.fieldGroup: [{ position: 30,label: 'Purchase Status',qualifier: 'PurchaseBasicData' }]
+  
+  PoStatus;
+  @UI.lineItem: [{ position: 60,label: 'Purchase Priority' ,importance: #HIGH }]  
+  @UI.selectionField: [{ position: 20 }]
+  @UI.dataPoint:{ title:'Priority' }
+  @UI.fieldGroup: [{ position: 40,label: 'Purchase Priority',qualifier: 'PurchaseBasicData' }]
+  
+   PoPriority;
+  @UI.lineItem: [{ position: 70,label: 'Purchase Status' ,importance: #MEDIUM }]  
+
+   Ccode;
+   @UI.lineItem: [{ position: 80,label: 'Created By' ,importance: #HIGH }]  
+   @UI.fieldGroup: [{ position: 10,label: 'Created By',qualifier: 'AdminData' }]
+      CreateBy;
+   @UI.lineItem: [{ position: 90,label: 'Created On' ,importance: #HIGH }]  
+   @UI.fieldGroup: [{ position: 20,label: 'Created On' ,qualifier: 'AdminData'}]
+      CreatedDateTime;
+      @UI.lineItem: [{ position: 100,label: 'Purchase Status' ,importance: #HIGH }]  
+   @UI.fieldGroup: [{ position: 30,label: 'Changed By',qualifier: 'AdminData' }]
+      ChangedDateTime;
+  //    TotalChange;
+  //    /* Associations */
+  //    _Priority;
+  //    _Status;
+  //    _toItem;
+
+}

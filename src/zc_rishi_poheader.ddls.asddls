@@ -3,7 +3,7 @@
 @AbapCatalog.preserveKey: true
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Consumption View'
-
+@Metadata.allowExtensions: true
 //@VDM.viewType: #CONSUMPTION
 define view ZC_RISHI_POHEADER as select from ZI_RISHI_POToalPrice {
     key PoDocument,
